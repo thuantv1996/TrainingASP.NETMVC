@@ -1,0 +1,8 @@
+Các thao tác co b?n v?i Visual Studio
+
+1.	Gi?i thi?u ASP.Net MVC
+
+2.	T?o d? án MVC
+3.	Model
+4.	Controller
+5.	View

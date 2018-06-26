@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <title>Login</title>
+</head>
+<body>
+    <div class="wrap"> 
+        <div class="panel"><h1>Luxury Watches</h1></div>
+        <div class="form">
+            <form id="login-form" action="~/Account/Login" method="post">
+                <p>Username</p>
+                <input type="text" name="Id"/>
+                <p>Password</p>
+                <input type="password" name="Pass" />
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

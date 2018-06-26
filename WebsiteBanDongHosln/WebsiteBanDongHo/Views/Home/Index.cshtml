@@ -1,0 +1,44 @@
+﻿@model WebsiteBanDongHo.Models.ViewModel.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shares/masterpage.cshtml";
+}
+
+<div>
+    <div class="container">
+        <h1>Sản phẩm mới nhất</h1>
+        <div>
+            @foreach (var item in Model.NewProducts)
+            {
+                <div class="item">
+                    <a href="#">
+                        <div class="thumbnail">
+                            <img src="@Url.Content("~/Contents/images/HINHLON/" + item.HINHLON)" alt="" />
+                        </div>
+                    </a>
+                    <div class="name-product"><h2>@item.TENSP</h2></div>
+                    <div><p>@String.Format("{0:0,0}", item.DONGIA) VNĐ</p></div>
+                </div>
+            }
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Sản phẩm giá rẻ</h1>
+        <div>
+            @foreach (var item in Model.SaveProducts)
+            {
+                <div class="item">
+                    <a href="#">
+                        <div class="thumbnail">
+                            <img src="@Url.Content("~/Contents/images/HINHLON/" + item.HINHLON)" alt="" />
+                        </div>
+                    </a>
+                    <div class="name-product"><h2>@item.TENSP</h2></div>
+                    <div><p>@String.Format("{0:0,0}", item.DONGIA) VNĐ</p></div>
+                </div>
+            }
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</div>

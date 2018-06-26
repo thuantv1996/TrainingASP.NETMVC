@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Contents/masterpage.css" type="text/css" rel="stylesheet"/>
+    <link href="~/Contents/home.css" type="text/css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="head">
+        <h1>LUXURY WATCHES</h1>
+    </div>
+    <div class="nav">
+        <ul class="menu">
+            <li class="menu-item"><a href="#">Home</a></li>
+            <li class="menu-item"><a href="#">Product</a></li>
+            <li class="menu-item"><a href="#">Cart</a></li>
+            <li class="menu-item"><a href="#">About</a></li>
+            <li class="menu-item"><a href="#">Check out</a></li>
+            <li class="menu-item"><a href="#">Login</a></li>
+        </ul>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

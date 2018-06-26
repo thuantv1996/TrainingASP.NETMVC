@@ -1,0 +1,29 @@
+﻿body{
+    background:#5ab5f7;
+}
+.wrap{
+    padding:0 35%;
+}
+.panel{
+    font-size:20px;
+    text-align:center;
+}
+#login-form{
+    width:80%;
+    padding:0 10%;
+}
+#login-form input{
+    width:100%;
+    font-size:20px;
+    padding:5px;
+}
+#login-form p{
+    font-size:20px;
+    margin-bottom:0px;
+}
+#login-form button{
+    font-size:30px;
+    width:104%;
+    background:#1db931;
+    margin-top:20px;
+}
