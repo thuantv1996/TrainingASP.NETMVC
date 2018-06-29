@@ -141,6 +141,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\cart.css" />
+    <Content Include="Contents\detail.css" />
     <Content Include="Contents\home.css" />
     <Content Include="Contents\login.css" />
     <Content Include="Contents\masterpage.css" />
@@ -157,12 +159,15 @@
     </Content>
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\jquery-1.11.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,10 +220,16 @@
     <Compile Include="Models\Context\THUONGHIEU.cs">
       <DependentUpon>BanDongHo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Implement\CartImplement.cs" />
+    <Compile Include="Models\Implement\DetailImplement.cs" />
     <Compile Include="Models\Implement\HomeImplement.cs" />
     <Compile Include="Models\Implement\LoginImplement.cs" />
+    <Compile Include="Models\Service\CartService.cs" />
+    <Compile Include="Models\Service\DetailService.cs" />
     <Compile Include="Models\Service\HomeService.cs" />
     <Compile Include="Models\Service\LoginService.cs" />
+    <Compile Include="Models\ViewModel\CartItemViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetailViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,6 +250,8 @@
       <DependentUpon>BanDongHo.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Shares\masterpage.cshtml" />
+    <Content Include="Views\Detail\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.table {
+    width: 1140px;
+    max-width: 100%;
+}
+
+.totalCart {
+    float: right;
+    margin-right: 420px;
+}
+
+.txtVND, .txtTotalPrice{
+    font-weight: bold;
+    font-size: 20px;
+}

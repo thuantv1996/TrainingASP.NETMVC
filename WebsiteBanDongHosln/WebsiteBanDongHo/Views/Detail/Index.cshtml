@@ -1,0 +1,38 @@
+﻿@model WebsiteBanDongHo.Models.ViewModel.DetailViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shares/masterpage.cshtml";
+}
+
+<link href="~/Contents/detail.css" rel="stylesheet" />
+
+<h1>Trang chi tiết sản phẩm</h1>
+<div class="container">
+    <div class="content-left">
+        <div class="imgContainer">
+            <ul class="imgBig">
+                <img src="@Url.Content("~/Contents/images/HINHLON/"+Model.product.HINHLON)" class="img-big" alt="" />
+            </ul>
+            <ul class="imgSmall">
+                <li>
+                    <img src="@Url.Content("~/Contents/images/HINHNHO/"+Model.product.HINHNHO+"/1.jpg")" class="img-responsive" alt="" />
+                </li>
+                <li>
+                    <img src="@Url.Content("~/Contents/images/HINHNHO/"+Model.product.HINHNHO+"/2.jpg")" class="img-responsive" alt="" />
+                </li>
+                <li>
+                    <img src="@Url.Content("~/Contents/images/HINHNHO/"+Model.product.HINHNHO+"/3.jpg")" class="img-responsive" alt="" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-right">
+        <h2>@Model.product.TENSP</h2>
+        <h5 class="item_price">@String.Format("{0:0,0}", (Model.product.DONGIA)) vnđ</h5>
+        <p><span>Mô tả:</span> @Model.product.MOTA</p>
+        <p><span>Đánh giá:</span> @Model.product.DANHGIA</p>
+        <a href="~/Cart/AddItem?productID=@Model.product.MASP&quantity=1" class="add-cart item_add">ADD TO CART</a>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+

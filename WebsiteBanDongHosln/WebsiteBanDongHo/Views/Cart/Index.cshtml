@@ -1,0 +1,156 @@
+﻿@model List<WebsiteBanDongHo.Models.ViewModel.CartItemViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shares/masterpage.cshtml";
+}
+<link href="~/Contents/cart.css" rel="stylesheet" />
+
+<h2>Giỏ Hàng</h2>
+
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Mã SP</td>
+                        <td>Tên SP</td>
+                        <td>Ảnh SP</td>
+                        <td>Số lượng</td>
+                        <td>Đơn giá</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="txtID" data-id="@item.product.MASP">@item.product.MASP</td>
+                            <td>@item.product.TENSP</td>
+                            <td><img src="~/Contents/images/HINHLON/@item.product.HINHLON" width="100" /></td>
+                            <td><input class="txtQuantity" type="number" min="1" value="@item.Quantity" /></td>
+                            <td class="txtPrice" data-price="@item.product.DONGIA">@String.Format("{0:0,0}", (item.product.DONGIA)) vnđ</td>
+                            <td><a href="#" class="btn-delete">Xoá</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="totalCart">
+                <span class="txtVND">Tổng tiền: </span>
+                <span class="txtTotalPrice" data-checkout="">
+                    0₫
+                </span>
+            </div>
+        }
+        else
+        {
+            <span>Chưa có sản phẩm nào trong giỏ hàng</span>
+        }
+
+    </div>
+</div>
+
+@*Phần này để chạy jquery và ajax, các bạn có thể tách ra file riêng củng được (tự tìm hiểu nhé)*@
+<script>
+    $(document).ready(function () {
+
+        setTotalCart();
+        setPriceCart();
+
+        //mỗi khi số lượng item cart thay đổi thì nó chạy hàm này
+        $(".txtQuantity").change(function () {
+            var quantity = $(this).val();
+            var price = $(this).closest("tr").find(".txtPrice").attr("data-price");
+            var id = $(this).closest("tr").find(".txtID").attr("data-id");
+
+            //tính lại tiền khi thay đổi số lượng
+            var totalMoney = price * quantity;
+            var format = addPeriod(totalMoney);
+            $(this).closest("tr").find(".txtPrice").html('<span class="cost">' + format + ' VNĐ' + '</span>');
+            setTotalCart();
+
+            //ajax gọi tới controller Cart và action Update
+            $.ajax({
+                url: "/Cart/Update", //đường dẫn ajax gọi tới
+                type: "POST",
+                data: {
+                    //những tham số truyền qua controller để xử lý
+                    id: id,
+                    quantity: quantity
+                },
+                success: function (data) {
+                    //data nhận được từ controller trả ra
+                    if (data == "Ok") {
+                        alert("Cập nhập thành công");
+                    }
+                }
+            })
+        });
+
+        //sự kiện được gọi khi nút xóa được bấm
+        $(".btn-delete").click(function () {
+            var self = $(this);
+            var id = $(this).closest("tr").find(".txtID").attr("data-id");
+
+            //ajax gọi tới controller Cart và action Delete
+            $.ajax({
+                url: "/Cart/Delete", //đường dẫn ajax gọi tới
+                type: "POST",
+                data: {
+                    //tham số truyền qua controller để xử lý
+                    id: id
+                },
+                success: function (data) {
+                    //data nhận được từ controller trả ra
+                    if (data == "Ok") {
+                        alert("Xóa thành công");
+                        self.closest("tr").remove();
+                        setTotalCart();
+                    }
+                }
+            })
+        });
+    });
+
+    //hàm xử lý tính tổng tất cả tiền trong giỏ hàng
+    function setTotalCart() {
+        var totalcart = 0;
+        $(".txtPrice").each(function () {
+            var price = $(this).attr("data-price");
+            var quantity = $(this).closest("tr").find(".txtQuantity").val();
+
+            totalcart = totalcart + price * quantity;
+
+            var temp = addPeriod(totalcart);
+            $(this).closest(".section").find(".txtTotalPrice").text(temp + '₫');
+        })
+    }
+
+    //hàm xử lý tính lại tổng tiền item cart
+    function setPriceCart() {
+        var totalMoney = 0;
+        $(".txtPrice").each(function () {
+            var price = $(this).attr("data-price");
+            var quantity = $(this).closest("tr").find(".txtQuantity").val();
+
+            totalMoney = price * quantity;
+            var tempMoney = addPeriod(totalMoney);
+            $(this).closest("tr").find(".txtPrice").html('<span class="cost">' + tempMoney + ' VNĐ' + '</span>');
+        })
+    }
+
+    //hàm format tiền sang định dạng việt nam (ví dụ: 56800000 -> 56,800,000)
+    function addPeriod(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+</script>

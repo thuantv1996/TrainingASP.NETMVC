@@ -11,7 +11,7 @@
             @foreach (var item in Model.NewProducts)
             {
                 <div class="item">
-                    <a href="#">
+                    <a href="~/Detail/Index?id=@item.MASP">
                         <div class="thumbnail">
                             <img src="@Url.Content("~/Contents/images/HINHLON/" + item.HINHLON)" alt="" />
                         </div>
@@ -29,7 +29,7 @@
             @foreach (var item in Model.SaveProducts)
             {
                 <div class="item">
-                    <a href="#">
+                    <a href="~/Detail/Index?id=@item.MASP">
                         <div class="thumbnail">
                             <img src="@Url.Content("~/Contents/images/HINHLON/" + item.HINHLON)" alt="" />
                         </div>
