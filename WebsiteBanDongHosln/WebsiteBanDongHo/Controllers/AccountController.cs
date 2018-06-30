@@ -29,5 +29,40 @@ namespace WebsiteBanDongHo.Controllers
                 return "Đăng nhập thất bại";
             }
         }
+
+        public ActionResult Register()
+        {
+            RegisterViewModel register = new RegisterViewModel();
+            ViewBag.MessageRegister = "";
+            return View(register);
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel register)
+        {
+            ViewBag.MessageRegister = "";
+            RegisterImplement registerService = new RegisterImplement();
+            if (ModelState.IsValid)
+            {
+                if (registerService.isExistAccount(register.Username))
+                {
+                    register.Username = "";
+                    ViewBag.MessageRegister += "Tài khoản đã tồn tại !";
+                    return View(register);
+                }
+                else
+                {
+                    if (registerService.Register(register))
+                    {
+                        ViewBag.MessageRegister += "Đăng ký thành công !";
+                    }
+                    else
+                    {
+                        ViewBag.MessageRegister += "Đăng ký thất bại !";
+                    }                
+                }
+            }
+            return View(register);
+        }
     }
 }

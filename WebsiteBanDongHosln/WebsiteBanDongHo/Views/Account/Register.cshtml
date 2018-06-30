@@ -1,0 +1,34 @@
+﻿@model WebsiteBanDongHo.Models.ViewModel.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shares/masterpage.cshtml";
+}
+<h2>Register</h2>
+<div>
+    <p style="color:#0F0">
+        @ViewBag.MessageRegister
+    </p>
+</div>
+<form method="post" action="~/Account/Register">
+    <div>
+        <p>
+           Username
+        </p>       
+        <input type="text" name="Username" value="@Model.Username"/>
+        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger", @style = "color: red" })
+    </div>
+
+    <div>
+        <p>
+            Password
+        </p>       
+        <input type="password" name="Password" value="@Model.Password"/>
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "color: red" })
+    </div>
+
+    <div>
+        <p> </p>
+        <input type="submit" value="Đăng ký" />
+    </div>
+</form>
+
